@@ -61,7 +61,7 @@ module TourCMS
     end
     
     def show_tour(tour, channel)
-      return_result(request("/c/tour/show", channel, {"id" => tour}))
+      return_result(request("/c/tour/show.xml", channel, {"id" => tour}))
     end
     
     def show_tour_departures(tour, channel)
