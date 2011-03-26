@@ -22,9 +22,9 @@ module TourCMS
     
     def search_tours(params = {}, channel = 0)
       if channel == 0
-        return_resultrequest("/p/tours/search.xml", 0, params))
+        return_result(request("/p/tours/search.xml", 0, params))
       else
-        return_resultrequest("/c/tours/search.xml", channel, params))
+        return_result(request("/c/tours/search.xml", channel, params))
       end
     end
     
