@@ -15,8 +15,8 @@ Jeweler::Tasks.new do |gem|
   gem.name = "tourcms"
   gem.homepage = "http://github.com/flextrip/tourcms"
   gem.license = "MIT"
-  gem.summary = %Q{A Ruby Library for TourCMS}
-  gem.description = %Q{A Ruby Library for interacting TourCMS}
+  gem.summary = %Q{A Ruby Library for the TourCMS API}
+  gem.description = %Q{A simple Ruby wrapper for interacting with the TourCMS API}
   gem.email = "alex@flextrip.com"
   gem.authors = ["Alex Kremer"]
   # Include your dependencies below. Runtime dependencies are required when using your gem,
@@ -24,7 +24,7 @@ Jeweler::Tasks.new do |gem|
   gem.add_runtime_dependency 'xml-object'
   #  gem.add_development_dependency 'rspec', '> 1.2.3'
 end
-#Jeweler::RubygemsDotOrgTasks.new
+Jeweler::RubygemsDotOrgTasks.new
 
 require 'rake/testtask'
 Rake::TestTask.new(:test) do |test|
