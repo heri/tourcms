@@ -31,7 +31,7 @@ Your Marketplace ID and Private Key can be found in the TourCMS Partner Portal. 
 	=> ""<?xml version="1.0" encoding="utf-8" ?><response><request>GET /p/channels/list.xml</request>
 		<error>OK</error><channel>(...)</channel></response>"
 
-### Working with your connecting in Obj mode
+### Working with your connection in Obj mode
 
 	# Instantiate the connection
 	conn = TourCMS::Connection.new("12345", "mydeepsecret", "obj")
