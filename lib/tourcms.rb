@@ -6,5 +6,6 @@ require 'cgi'
 require 'open-uri'
 require 'xml-object'
 
+require 'tour_cms/hash'
 require 'tour_cms/connection'
 

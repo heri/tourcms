@@ -53,9 +53,15 @@ Note: XML-Object **does not support .inspect** so obj will return empty. XML-Obj
 	obj.channel.channel_id
 	=> "1234567"
 	# Search for all tours in GB
-	obj = conn.search_tours("country" => "GB")
+	obj = conn.search_tours(:country => "GB")
 	obj.tour.first.tour_name
 	=> "Canyoning"
+	
+### Passing parameters
+
+Many TourCMS methods accept parameters. Most methods take a hash of parameters like so:
+
+	obj = conn.search_tours({:country => "GB", :lang => "en"})
 
 ## List of functions in TourCMS::Connection
 
