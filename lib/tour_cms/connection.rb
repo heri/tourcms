@@ -103,7 +103,7 @@ module TourCMS
     def request(path, channel = 0, params = {}, verb = "GET")
       url = @base_url + path + construct_params(params)
       req_time = Time.now.utc
-      signature = generate_signature(path, verb, channel, req_time.to_i)
+      signature = generate_signature(path + construct_params(params), verb, channel, req_time.to_i)
       
       headers = {"Content-type" => "text/xml", "charset" => "utf-8", "Date" => req_time.strftime("%a, %d %b %Y %H:%M:%S GMT"), 
         "Authorization" => "TourCMS #{channel}:#{@marketp_id}:#{signature}" }
