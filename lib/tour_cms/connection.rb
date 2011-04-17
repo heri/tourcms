@@ -86,7 +86,7 @@ module TourCMS
       if param_hash.empty?
         res = ""
       else
-        qs = param_hash.stringify_keys.reject{|k,v| v.nil? || v.empty?}.collect{|k,v|"#{CGI.escape(k)}=#{CGI.escape(v)}"}.join("&")
+        qs = param_hash.stringify.reject{|k,v| v.nil? || v.empty?}.collect{|k,v|"#{CGI.escape(k)}=#{CGI.escape(v)}"}.join("&")
         qs.empty? ? res = "" : res = "?#{qs}"
       end
       res
