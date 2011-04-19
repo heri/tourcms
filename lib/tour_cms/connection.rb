@@ -73,14 +73,6 @@ module TourCMS
     end
     
     private
-    
-    def return_result(result)
-      if @result_type == "raw"
-        result
-      else
-        XMLObject.new(result)
-      end
-    end
         
     def construct_params(param_hash)
       if param_hash.empty?
