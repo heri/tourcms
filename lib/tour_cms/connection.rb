@@ -9,67 +9,67 @@ module TourCMS
     end
     
     def api_rate_limit_status(channel = 0)
-      return_result(request("/api/rate_limit_status.xml", channel))
+      request("/api/rate_limit_status.xml", channel)
     end
     
     def list_channels
-      return_result(request("/p/channels/list.xml"))
+      request("/p/channels/list.xml")
     end
     
     def show_channel(channel)
-      return_result(request("/c/channel/show.xml", channel))
+      request("/c/channel/show.xml", channel)
     end
     
     def search_tours(params = {}, channel = 0)
       if channel == 0
-        return_result(request("/p/tours/search.xml", 0, params))
+        request("/p/tours/search.xml", 0, params)
       else
-        return_result(request("/c/tours/search.xml", channel, params))
+        request("/c/tours/search.xml", channel, params)
       end
     end
     
     def search_hotels_range(params = {}, tour = "", channel = 0)
       if channel == 0
-        return_result(request("/p/hotels/search_range.xml", 0, params.merge({"single_tour_id" => tour})))
+        request("/p/hotels/search_range.xml", 0, params.merge({"single_tour_id" => tour}))
       else
-        return_result(request("/c/hotels/search_range.xml", channel, params.merge({"single_tour_id" => tour})))
+        request("/c/hotels/search_range.xml", channel, params.merge({"single_tour_id" => tour}))
       end
     end
     
     def search_hotels_specific(params = {}, tour = "", channel = 0)
       if channel == 0
-        return_result(request("/p/hotels/search-avail.xml", 0, params.merge({"single_tour_id" => tour})))
+        request("/p/hotels/search-avail.xml", 0, params.merge({"single_tour_id" => tour}))
       else
-        return_result(request("/c/hotels/search-avail.xml", channel, params.merge({"single_tour_id" => tour})))
+        request("/c/hotels/search-avail.xml", channel, params.merge({"single_tour_id" => tour}))
       end
     end
     
     def list_tours(channel = 0)
       if channel == 0
-        return_result(request("/p/tours/list.xml"))
+        request("/p/tours/list.xml")
       else
-        return_result(request("/c/tours/list.xml", channel))
+        request("/c/tours/list.xml", channel)
       end
     end
     
     def list_tour_images(channel = 0)
       if channel == 0
-        return_result(request("/p/tours/images/list.xml"))
+        request("/p/tours/images/list.xml")
       else
-        return_result(request("/c/tours/images/list.xml", channel))
+        request("/c/tours/images/list.xml", channel)
       end
     end
     
     def show_tour(tour, channel)
-      return_result(request("/c/tour/show.xml", channel, {"id" => tour}))
+      request("/c/tour/show.xml", channel, {"id" => tour})
     end
     
     def show_tour_departures(tour, channel)
-      return_result(request("/c/tour/datesprices/dep/show.xml", channel, {"id" => tour}))
+      request("/c/tour/datesprices/dep/show.xml", channel, {"id" => tour})
     end
     
     def show_tour_freesale(tour, channel)
-      return_result(request("/c/tour/datesprices/freesale/show.xml", channel, {"id" => tour}))
+      request("/c/tour/datesprices/freesale/show.xml", channel, {"id" => tour})
     end
     
     private
@@ -107,17 +107,8 @@ module TourCMS
       
       headers = {"Content-type" => "text/xml", "charset" => "utf-8", "Date" => req_time.strftime("%a, %d %b %Y %H:%M:%S GMT"), 
         "Authorization" => "TourCMS #{channel}:#{@marketp_id}:#{signature}" }
-      
-      begin
-        response = open(url, headers).read
-      rescue Exception => e
-        puts "Caught exception opening #{url}"
-        puts e.message
-        puts e.backtrace.inspect
-      rescue OpenURI::HTTPError => http_e
-        puts "Received HTTP Error opening #{url}"
-        puts http_e.io.status[0].to_s
-      end
+            
+      @result_type == "raw" ? open(url, headers) : doc = Hash.from_xml(open(url, headers))[:response]
     end
   end
 end

@@ -5,7 +5,7 @@ require 'base64'
 require 'cgi'
 require 'open-uri'
 require 'rubygems'
-require 'xml-object'
+require 'nokogiri'
 
 require 'tour_cms/hash'
 require 'tour_cms/connection'
