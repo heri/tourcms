@@ -43,8 +43,9 @@ Your Marketplace ID and Private Key can be found in the TourCMS Partner Portal. 
 	# List the channels we have access to
 	obj = conn.list_channels
 	=> {Hash of all connected TourCMS channels and their properties}
+	# See how many TourCMS channels you're connected to.
 	obj[:channel].count
-	=> 100 # Integer representing how many TourCMS channels you're connected to.
+	=> 100 
 	obj[:channel].first[:channel_name]
 	=> "My Adventure Tour Operator"
 	# Show a particular channel

@@ -19,10 +19,6 @@ Jeweler::Tasks.new do |gem|
   gem.description = %Q{A simple Ruby wrapper for interacting with the TourCMS API}
   gem.email = "alex@flextrip.com"
   gem.authors = ["Alex Kremer"]
-  # Include your dependencies below. Runtime dependencies are required when using your gem,
-  # and development dependencies are only needed for development (ie running rake tasks, tests, etc)
-  gem.add_runtime_dependency 'xml-object'
-  #  gem.add_development_dependency 'rspec', '> 1.2.3'
 end
 Jeweler::RubygemsDotOrgTasks.new
 
