@@ -12,7 +12,7 @@ Using the library is as simple as creating a **TourCMS::Connection** object:
 
 	conn = TourCMS::Connection.new(marketplace_id, private_key, result_type)
 	
-Your Marketplace ID and Private Key can be found in the TourCMS Partner Portal. The result type can be one of **obj** or **raw** where **raw** will return the raw XML from the API and **obj** will return an XMLObject using the [XML-Object Gem](https://github.com/jordi/xml-object).
+Your Marketplace ID and Private Key can be found in the TourCMS Partner Portal. The result type can be one of **hash** or **raw** where **raw** will return the raw XML from the API and **hash** will return a Ruby Hash of the result.
 
 ### Working with your connection in Raw mode
 
@@ -31,30 +31,29 @@ Your Marketplace ID and Private Key can be found in the TourCMS Partner Portal. 
 	=> ""<?xml version="1.0" encoding="utf-8" ?><response><request>GET /p/channels/list.xml</request>
 		<error>OK</error><channel>(...)</channel></response>"
 
-### Working with your connection in Obj mode
+### Working with your connection in Hash mode
 
 	# Instantiate the connection
-	conn = TourCMS::Connection.new("12345", "mydeepsecret", "obj")
+	conn = TourCMS::Connection.new("12345", "mydeepsecret", "hash")
 	# Check we're working
 	obj = conn.api_rate_limit_status
-	
-Note: XML-Object **does not support .inspect** so obj will return empty. XML-Object uses method_missing to access object properties so **you will need to know which property you're trying to access** beforehand -- Check the API docs.
-	
-	obj.hourly_limit
+	=> {:request=>"GET /api/rate_limit_status.xml", :remaining_hits=>1999, :error=>"OK", :hourly_limit=>2000}	
+	obj[:hourly_limit]
 	=> 2000
 	# List the channels we have access to
 	obj = conn.list_channels
-	obj.channel
-	=> [Array of Channel Objects]
-	obj.channel.first.channel_name
+	=> {Hash of all connected TourCMS channels and their properties}
+	obj[:channel].count
+	=> 100 # Integer representing how many TourCMS channels you're connected to.
+	obj[:channel].first[:channel_name]
 	=> "My Adventure Tour Operator"
 	# Show a particular channel
 	obj = conn.show_channel(1234567)
-	obj.channel.channel_id
+	obj[:channel][:channel_id]
 	=> "1234567"
 	# Search for all tours in GB
 	obj = conn.search_tours(:country => "GB")
-	obj.tour.first.tour_name
+	obj[:tour].first[:tour_name]
 	=> "Canyoning"
 	
 ### Passing parameters
