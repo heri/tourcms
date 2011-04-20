@@ -73,16 +73,6 @@ module TourCMS
     end
     
     private
-        
-    def construct_params(param_hash)
-      if param_hash.empty?
-        res = ""
-      else
-        qs = param_hash.stringify.reject{|k,v| v.nil? || v.empty?}.collect{|k,v|"#{CGI.escape(k)}=#{CGI.escape(v)}"}.join("&")
-        qs.empty? ? res = "" : res = "?#{qs}"
-      end
-      res
-    end
     
     def generate_signature(path, verb, channel, outbound_time)
       string_to_sign = "#{channel}/#{@marketp_id}/#{verb}/#{outbound_time}#{path}".strip
@@ -93,14 +83,16 @@ module TourCMS
     end
     
     def request(path, channel = 0, params = {}, verb = "GET")
-      url = @base_url + path + construct_params(params)
+      url = @base_url + path + "?#{params.to_query}"
       req_time = Time.now.utc
-      signature = generate_signature(path + construct_params(params), verb, channel, req_time.to_i)
+      signature = generate_signature(path + "?#{params.to_query}", verb, channel, req_time.to_i)
       
       headers = {"Content-type" => "text/xml", "charset" => "utf-8", "Date" => req_time.strftime("%a, %d %b %Y %H:%M:%S GMT"), 
         "Authorization" => "TourCMS #{channel}:#{@marketp_id}:#{signature}" }
             
-      @result_type == "raw" ? open(url, headers) : doc = Hash.from_xml(open(url, headers))[:response]
+      response = open(url, headers).read
+
+      @result_type == "raw" ? response : Hash.from_xml(response)["response"]
     end
   end
 end
