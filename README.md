@@ -77,6 +77,10 @@ Many TourCMS methods accept parameters. Most methods take a hash of parameters l
 *	show\_tour\_departures
 *	show\_tour\_freesale
 
+## Dependencies
+
+This gem depends on ActiveSupport 3.0.0+
+
 ## Contributing to tourcms
  
 * Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet
