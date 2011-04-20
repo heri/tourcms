@@ -38,23 +38,23 @@ Your Marketplace ID and Private Key can be found in the TourCMS Partner Portal. 
 	# Check we're working
 	obj = conn.api_rate_limit_status
 	=> {:request=>"GET /api/rate_limit_status.xml", :remaining_hits=>1999, :error=>"OK", :hourly_limit=>2000}	
-	obj[:hourly_limit]
+	obj["hourly_limit"]
 	=> 2000
 	# List the channels we have access to
 	obj = conn.list_channels
 	=> {Hash of all connected TourCMS channels and their properties}
 	# See how many TourCMS channels you're connected to.
-	obj[:channel].count
+	obj["channel"].count
 	=> 100 
-	obj[:channel].first[:channel_name]
+	obj["channel"].first["channel_name"]
 	=> "My Adventure Tour Operator"
 	# Show a particular channel
 	obj = conn.show_channel(1234567)
-	obj[:channel][:channel_id]
+	obj["channel"]["channel_id"]
 	=> "1234567"
 	# Search for all tours in GB
 	obj = conn.search_tours(:country => "GB")
-	obj[:tour].first[:tour_name]
+	obj["tour"].first["tour_name"]
 	=> "Canyoning"
 	
 ### Passing parameters
