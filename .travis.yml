@@ -1,0 +1,8 @@
+language: ruby
+rvm:
+  - 2.1.6
+  - ruby-head
+script: bundle exec rake test
+matrix:
+ allow_failures:
+   - rvm: ruby-head
