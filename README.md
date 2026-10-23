@@ -95,3 +95,7 @@ This gem depends on ActiveSupport 3.0.0+
 
 Copyright (c) 2011 Flextrip. See LICENSE.txt for further details.
 
+
+## Who is behind this
+
+Heri is a software engineer, photographer, father and Montréaler. Building in the open — see more projects at [studiozenkai.com](https://studiozenkai.com).
